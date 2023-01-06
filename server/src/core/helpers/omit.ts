@@ -1,3 +1,5 @@
+import { FlattenMaps } from "mongoose";
+
 function omit<T>(obj: T, property: keyof T | (keyof T)[]): Omit<T, keyof T> {
     const newObj = { ...obj };
     if (Array.isArray(property)) {

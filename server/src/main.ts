@@ -9,7 +9,9 @@ import logger from "./utils/logger";
 import { connectToDatabase, disconnectFromDatabase } from "./utils/database";
 
 import userRouter from "./modules/user/user.route";
+import authRouter from "./modules/auth/auth.route";
 import requestLoggerMiddleware from "./middlewares/requestLogger.middleware";
+import deserializeUserMiddleware from "./middlewares/deserializeUser.middleware";
 
 const PORT = process.env.PORT || 8000;
 
@@ -26,10 +28,12 @@ app.use(
     })
 );
 app.use(helmet());
+app.use(deserializeUserMiddleware);
 
 app.use(requestLoggerMiddleware);
 
 app.use("/api/user", userRouter);
+app.use("/api/auth", authRouter);
 
 app.use(errorMiddleware);
 
