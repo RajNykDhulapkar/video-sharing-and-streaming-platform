@@ -10,6 +10,8 @@ import { connectToDatabase, disconnectFromDatabase } from "./utils/database";
 
 import userRouter from "./modules/user/user.route";
 import authRouter from "./modules/auth/auth.route";
+import videoRouter from "./modules/video/video.route";
+
 import requestLoggerMiddleware from "./middlewares/requestLogger.middleware";
 import deserializeUserMiddleware from "./middlewares/deserializeUser.middleware";
 
@@ -34,6 +36,7 @@ app.use(requestLoggerMiddleware);
 
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/video", videoRouter);
 
 app.use(errorMiddleware);
 
