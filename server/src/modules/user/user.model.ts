@@ -1,5 +1,6 @@
 import { prop, getModelForClass, pre } from "@typegoose/typegoose";
 import argon2 from "argon2";
+import { StatusCodes } from "http-status-codes";
 import HttpException from "../../core/exceptions/http.exception";
 
 @pre<User>("save", async function (next) {
@@ -9,7 +10,7 @@ import HttpException from "../../core/exceptions/http.exception";
             this.password = hash;
             next();
         } catch (error: any) {
-            next(new HttpException(error.message, 500));
+            next(new HttpException(error.message, StatusCodes.INTERNAL_SERVER_ERROR));
         }
     } else {
         return next();

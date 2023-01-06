@@ -3,13 +3,19 @@ import express from "express";
 import cors from "cors";
 import { CORS_ORIGIN } from "./constants";
 import helmet from "helmet";
+import responseTime from "response-time";
 import errorMiddleware from "./middlewares/error.middleware";
 import logger from "./utils/logger";
 import { connectToDatabase, disconnectFromDatabase } from "./utils/database";
 
+import userRouter from "./modules/user/user.route";
+import requestLoggerMiddleware from "./middlewares/requestLogger.middleware";
+
 const PORT = process.env.PORT || 8000;
 
 const app = express();
+
+app.use(responseTime());
 
 app.use(cookieParser());
 app.use(express.json());
@@ -20,6 +26,10 @@ app.use(
     })
 );
 app.use(helmet());
+
+app.use(requestLoggerMiddleware);
+
+app.use("/api/user", userRouter);
 
 app.use(errorMiddleware);
 
