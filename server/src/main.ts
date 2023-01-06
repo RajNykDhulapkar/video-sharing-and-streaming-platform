@@ -3,8 +3,11 @@ import express from "express";
 import cors from "cors";
 import { CORS_ORIGIN } from "./constants";
 import helmet from "helmet";
+import errorMiddleware from "./middlewares/error.middleware";
+import logger from "./utils/logger";
+import { connectToDatabase, disconnectFromDatabase } from "./utils/database";
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 
@@ -18,21 +21,26 @@ app.use(
 );
 app.use(helmet());
 
-const server = app.listen(PORT, () => {
-    console.log("Server listening on http://localhost:" + PORT);
+app.use(errorMiddleware);
+
+const server = app.listen(PORT, async () => {
+    await connectToDatabase();
+    logger.info("Server listening on http://localhost:" + PORT);
 });
 
 const signals: NodeJS.Signals[] = ["SIGINT", "SIGTERM", "SIGQUIT"];
 
 function gracefulShutdown(signal: NodeJS.Signals) {
-    process.on(signal, () => {
-        console.log(`Received ${signal}. Shutting down gracefully...`);
+    process.on(signal, async () => {
+        logger.info(`Received ${signal}. Shutting down gracefully...`);
         server.close(() => {
-            console.log("Server closed.");
+            logger.info("Server closed.");
         });
-        // todo disconnect from db
 
-        console.log("Exiting process...");
+        // disconnect from database
+        await disconnectFromDatabase();
+
+        logger.info("Exiting process...");
 
         process.exit(0);
     });

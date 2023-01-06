@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import logger from "./logger";
 
-const DB_CONNECTION_STRING =
-    process.env.DB_CONNECTION_STRING || "mongodb://localhost:27017/your-database-name";
+// Then the connection to localhost is refused on the IPv6 address ::1 . Mongoose per default uses IPv6. Set the IPv4 address explicit
+const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017/vssDB";
 
 export async function connectToDatabase() {
     try {
