@@ -1,8 +1,8 @@
 import { getModelForClass, prop, Ref } from "@typegoose/typegoose";
-import { customAlphabet } from "nanoid";
+import * as nanoid from "nanoid";
 import { User } from "../user/user.model";
 
-const nanoid = customAlphabet("1234567890abcdefghijklmnopqrstuvwxyz", 10);
+const genNanoid = nanoid.customAlphabet("1234567890abcdefghijklmnopqrstuvwxyz", 10);
 
 export class Video {
     @prop()
@@ -24,7 +24,7 @@ export class Video {
 
     @prop({
         unique: true,
-        default: () => nanoid(),
+        default: () => genNanoid(),
     })
     public videoId: string;
 
