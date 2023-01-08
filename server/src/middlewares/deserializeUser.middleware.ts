@@ -19,3 +19,5 @@ export default function deserializeUserMiddleware(req: Request, res: Response, n
     }
     return next();
 }
+
+// q: git how to remove a direction from git history after it has been add in .gitignore

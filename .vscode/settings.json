@@ -1,5 +1,5 @@
 {
-    "cSpell.words": ["middlewares", "pino"],
+    "cSpell.words": ["Mantine", "middlewares", "pino"],
     "advancedNewFile.exclude": {
         "node_modules": true
     }

@@ -17,3 +17,11 @@
 2. yarn add @mantine/hooks @mantine/core @mantine/next react-query axios @mantine/notifications tabler-icons-react @mantine/dropzone
 
 3. Setup Mantine https://mantine.dev/theming/next/
+
+### q: git how to remove a direction from git history after it has been add in .gitignore
+
+```
+git rm -r --cached .
+git add .
+git commit -m "fixed untracked files"
+```
