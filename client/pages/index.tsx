@@ -5,10 +5,20 @@ import styles from "../styles/Home.module.css";
 import { ReactElement } from "react";
 import HomePageLayout from "../layout/Home";
 import { useVideo } from "../context/video";
+import VideoTeaser from "../components/VideoTeaser";
+import { SimpleGrid } from "@mantine/core";
 
 const Home = () => {
     const { videos } = useVideo();
-    return <div className={styles.container}>{JSON.stringify(videos)}</div>;
+    return (
+        <div className={styles.container}>
+            <SimpleGrid cols={3}>
+                {(videos || []).map((video) => (
+                    <VideoTeaser key={video.videoId} video={video} />
+                ))}
+            </SimpleGrid>
+        </div>
+    );
 };
 
 Home.getLayout = function (page: ReactElement) {
