@@ -3,3 +3,4 @@ resources
 .vscode
 **/**/build/
 **/**/uploads/*.mp4
+**/**/.env
