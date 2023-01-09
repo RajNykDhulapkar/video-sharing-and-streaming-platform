@@ -125,7 +125,7 @@ export async function streamVideoHandler(
             "Accept-Ranges": "bytes",
             "Content-Length": contentLength,
             "Content-Type": "video/mp4",
-            // "Cross-Origin-Resource-Policy": "cross-origin",
+            "Cross-Origin-Resource-Policy": "cross-origin",
         };
         res.writeHead(StatusCodes.PARTIAL_CONTENT, headers);
         const videStream = fs.createReadStream(filePath, {
