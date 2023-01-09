@@ -9,6 +9,7 @@ const router = express.Router();
 // base route: /api/user
 
 router.get("/", requireUserMiddleware, (req, res) => {
+    // console.log(req.cookies);
     return res.send(res.locals.user);
 });
 

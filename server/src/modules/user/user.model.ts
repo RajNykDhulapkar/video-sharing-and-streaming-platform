@@ -26,6 +26,9 @@ export class User {
     @prop({ required: true })
     public password: string;
 
+    @prop()
+    public picture: string;
+
     public async comparePassword(password: string): Promise<boolean> {
         return argon2.verify(this.password, password);
     }

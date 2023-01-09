@@ -15,6 +15,9 @@ import videoRouter from "./modules/video/video.route";
 import requestLoggerMiddleware from "./middlewares/requestLogger.middleware";
 import deserializeUserMiddleware from "./middlewares/deserializeUser.middleware";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 const PORT = process.env.PORT || 8000;
 
 const app = express();
