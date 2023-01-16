@@ -69,3 +69,6 @@ function gracefulShutdown(signal: NodeJS.Signals) {
 signals.forEach((signal) => {
     gracefulShutdown(signal);
 });
+
+// q: git clear cache command
+// a: git rm -r --cached .
